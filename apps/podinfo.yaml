@@ -4,7 +4,7 @@ metadata:
   name: podinfo
   namespace: apps
 spec:
-  interval: 10m
+  interval: 5m
   url: oci://ghcr.io/stefanprodan/manifests/podinfo
   verify:
     provider: cosign
@@ -19,7 +19,7 @@ metadata:
 spec:
   serviceAccountName: dev-team
   targetNamespace: apps
-  interval: 1h
+  interval: 5m
   retryInterval: 2m
   timeout: 5m
   sourceRef:
@@ -35,7 +35,8 @@ spec:
         metadata:
           name: podinfo
         spec:
-          minReplicas: 3
+          minReplicas: 1
+          maxReplicas: 5
       target:
         name: podinfo
         kind: HorizontalPodAutoscaler
